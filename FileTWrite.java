@@ -1,42 +1,24 @@
-package tuan3_Vidu;
-import java.util.Random;
-import java.io.DataOutputStream;
+package Bai1;
+
+import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.FileWriter;
+import java.util.Scanner;
 
-public class FileTWrite extends Thread {
-	
-
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-try {
-            
-            for (int i=0; i<5; i++) {
-            	
-            	FileWriter fw = new FileWriter("D:\\study/testout.txt");
-	            Random rd = new Random();
-	            int number = rd.nextInt();
-	            fw.write(number);
-	            fw.close();
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        System.out.println("Success...");
+public class FileTWrite {
+	void write(String name) {
+		try {
+			File myObj = new File(name);
+			Scanner myWrite = new Scanner(myObj);
+			while (myWrite.hasNextLine()) {
+				String data = myWrite.nextLine();
+				System.out.println("Number Array: " +data);
+			}
+			myWrite.close();	
+		}catch (FileNotFoundException e) {
+			System.out.println("Error occured.");
+			e.printStackTrace();
+		}
 	}
 	
-	public static void main(String args[]) {
-		FileTWrite f1 = new FileTWrite();
-		FileTWrite f2 = new FileTWrite();
-		FileTWrite f3 = new FileTWrite();
-        Thread fi1 = new Thread(f1);
-        Thread fi2 = new Thread(f2);
-        Thread fi3 = new Thread(f3);
-        f1.start();
-        f2.start();
-        f3.start();
-    }
 }
+
